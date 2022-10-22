@@ -3,13 +3,16 @@ import * as ethers from "ethers";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { Deployer } from "@matterlabs/hardhat-zksync-deploy";
 
+const secret = require('../.secret.json');
+console.log(secret.pri_key);
+
 // An example of a deploy script that will deploy and call a simple contract.
 export default async function (hre: HardhatRuntimeEnvironment) {
   console.log(`Running deploy script for the Greeter contract`);
 
   // Initialize the wallet.
   const provider = new Provider(hre.userConfig.zkSyncDeploy?.zkSyncNetwork);
-  const wallet = new Wallet("<WALLET-PRIVATE-KEY>");
+  const wallet = new Wallet(secret.pri_key);
 
   // Create deployer object and load the artifact of the contract you want to deploy.
   const deployer = new Deployer(hre, wallet);
